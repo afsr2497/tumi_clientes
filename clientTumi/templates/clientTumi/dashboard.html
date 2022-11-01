@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cliente Tumi</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    </head>
+    <body class="container bg-secondary">
+        <div class="row min-vh-100 bg-white text-center">
+            <div class="col-12">
+                <br>
+                <div class="row justify-content-center">
+                    <div class="col-4 alert alert-dark">
+                        <h4>Historial de inspecciones</h4>
+                    </div>
+                </div>
+                <br>
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <th>Fecha</th>
+                                <th>Unidad minera</th>
+                                <th>Informe de inspeccion</th>
+                                <th>Rosbag</th>
+                                <th>Resultado en Las</th>
+                            </thead>
+                            <tbody>
+                                {% for inspeccion in inspecciones_usuario %}
+                                <tr>
+                                    <td>{{ inspeccion.fechaInspeccion }}</td>
+                                    <td>{{ inspeccion.unidadMinera }}</td>
+                                    <td><a class="btn btn-success" href="{% url 'clientTumi:descargarImagen' 3 %}">In</a></td>
+                                    <td><a class="btn btn-danger">Rb</a></td>
+                                    <td><a class="btn btn-warning">Las</a></td>
+                                    <td><a class="btn btn-info">Vid</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

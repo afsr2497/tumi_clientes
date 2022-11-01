@@ -1,13 +1,29 @@
 from django.shortcuts import render
-from django.http import FileResponse, HttpResponse
+from django.http import FileResponse, HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate,login,logout
 
 from clientTumi.models import ejemploArchivo
 from PIL import Image
+from .models import inspeccionInformacion
 
 # Create your views here.
 
 def index(request):
-    return HttpResponse('Hola Tumi')
+    if request.method == 'POST':
+        infoUsuario = request.POST.get('usuarioInfo')
+        infoContra = request.POST.get('contraInfo')
+        usrInfo = authenticate(request,username=infoUsuario,password=infoContra)
+        if usrInfo is not None:
+            login(request,usrInfo)
+            return HttpResponseRedirect('dashboard')
+        else:
+            return HttpResponseRedirect('index')
+    return render(request,'clientTumi/login.html')
+
+def dashboard(request):
+    return render(request,'clientTumi/dashboard.html',{
+        'inspecciones_usuario':inspeccionInformacion.objects.all()
+    })
 
 def subirArchivos(request):
     if request.method == 'POST':
