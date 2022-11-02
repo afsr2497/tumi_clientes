@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate,login,logout
 from clientTumi.models import ejemploArchivo
 from PIL import Image
 from .models import inspeccionInformacion
+from django.urls import reverse
+import requests
 
 # Create your views here.
 
@@ -17,7 +19,7 @@ def index(request):
             login(request,usrInfo)
             return HttpResponseRedirect('dashboard')
         else:
-            return HttpResponseRedirect('index')
+            return HttpResponseRedirect(reverse('clientTumi:index'))
     return render(request,'clientTumi/login.html')
 
 def dashboard(request):
@@ -46,3 +48,8 @@ def descargarImagen(request,ind):
     response['Content-Disposition'] = 'attachment; filename=usuario.jpeg'
     img_usr.save(response,'jpeg')
     return response
+
+def consultarRequest(request):
+    servicioLidar = requests.get('http://127.0.0.1:8080/clientTumi/procesarRequest')
+    print(servicioLidar.json())
+    return HttpResponseRedirect(reverse('clientTumi:dashboard'))

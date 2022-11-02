@@ -9,4 +9,5 @@ urlpatterns = [
     path('descargarArchivos',views.descargarArchivos,name='descargarArchivos'),
     path('descargarImagen/<str:ind>',views.descargarImagen,name='descargarImagen'),
     path('dashboard',views.dashboard,name='dashboard'),
+    path('consultarRequest',views.consultarRequest,name='consultarRequest'),
 ]

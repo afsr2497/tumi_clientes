@@ -23,6 +23,7 @@
                                 <th>Informe de inspeccion</th>
                                 <th>Rosbag</th>
                                 <th>Resultado en Las</th>
+                                <th>Video de inspeccion</th>
                             </thead>
                             <tbody>
                                 {% for inspeccion in inspecciones_usuario %}
@@ -32,7 +33,7 @@
                                     <td><a class="btn btn-success" href="{% url 'clientTumi:descargarImagen' 3 %}">In</a></td>
                                     <td><a class="btn btn-danger">Rb</a></td>
                                     <td><a class="btn btn-warning">Las</a></td>
-                                    <td><a class="btn btn-info">Vid</a></td>
+                                    <td><a class="btn btn-info" href="{% url 'clientTumi:consultarRequest' %}">Vid</a></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
